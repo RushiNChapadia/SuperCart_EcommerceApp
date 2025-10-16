@@ -21,6 +21,7 @@ object ApiClient {
             .addInterceptor(interceptor)
             .build()
 
+        //192.168.1.241
         Retrofit.Builder()
             .baseUrl("http://10.0.2.2/myshop/index.php/")
             .client(client)
