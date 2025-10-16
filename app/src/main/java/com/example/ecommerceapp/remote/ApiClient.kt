@@ -22,7 +22,7 @@ object ApiClient {
             .build()
 
         Retrofit.Builder()
-            .baseUrl("http://192.168.1.241/myshop/index.php/")
+            .baseUrl("http://10.0.2.2/myshop/index.php/")
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
