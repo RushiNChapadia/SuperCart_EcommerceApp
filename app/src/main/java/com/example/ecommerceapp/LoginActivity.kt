@@ -76,6 +76,7 @@ class LoginActivity : AppCompatActivity() {
                     finish()
                     return
                 }
+
             }
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 Toast.makeText(this@LoginActivity, "Network error.", Toast.LENGTH_SHORT).show()

@@ -3,6 +3,8 @@ package com.example.ecommerceapp.remote
 import com.example.ecommerceapp.model.CategoryResponse
 import com.example.ecommerceapp.model.LoginRequest
 import com.example.ecommerceapp.model.LoginResponse
+import com.example.ecommerceapp.model.LogoutRequest
+import com.example.ecommerceapp.model.LogoutResponse
 import com.example.ecommerceapp.model.ProductResponse
 import com.example.ecommerceapp.model.SignupRequest
 import com.example.ecommerceapp.model.SignupResponse
@@ -44,4 +46,9 @@ interface ApiService {
     suspend fun getProductsBySubCategory(
         @Path("sub_category_id") subCategoryId: Int
     ): Response<ProductResponse>
+
+    @POST("User/logout")
+    @Headers("Content-Type: application/json")
+    suspend fun logoutUser(@Body logoutRequest: LogoutRequest): Response<LogoutResponse>
+
 }

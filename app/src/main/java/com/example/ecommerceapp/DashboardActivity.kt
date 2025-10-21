@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ecommerceapp.databinding.ActivityDashboardBinding
@@ -18,11 +20,14 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import com.example.ecommerceapp.SmartPhonesActivity
+import com.example.ecommerceapp.viewmodel.LogoutViewModel
 
 class DashboardActivity : AppCompatActivity() {
     lateinit var binding: ActivityDashboardBinding
     val apiService: ApiService = ApiService.getInstance()
     private lateinit var adapter: CategoryAdapter
+    private val logoutViewModel: LogoutViewModel by viewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -33,6 +38,28 @@ class DashboardActivity : AppCompatActivity() {
         binding = ActivityDashboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        logoutViewModel.logoutResponse.observe(this, Observer { response ->
+            if (response.isSuccessful && response.body()?.status == 0) {
+                Toast.makeText(this, response.body()?.message, Toast.LENGTH_SHORT).show()
+
+                // Clear stored session (if using SharedPreferences)
+                val prefs = getSharedPreferences("user_session", MODE_PRIVATE)
+                prefs.edit().clear().apply()
+
+                // Redirect to login
+                val intent = Intent(this, LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+                finish()
+            } else {
+                Toast.makeText(
+                    this,
+                    "Logout failed: ${response.body()?.message ?: "Try again"}",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        })
+
         setSupportActionBar(binding.toolbar)
         val toggle = ActionBarDrawerToggle(
             this, binding.drawerLayout, binding.toolbar,
@@ -41,6 +68,18 @@ class DashboardActivity : AppCompatActivity() {
         )
         binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
+
+        binding.navView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_logout -> {
+                    performLogout()
+                }
+                // Add other menu items if needed
+            }
+            binding.drawerLayout.closeDrawers()
+            true
+        }
+
 
 
         binding.recyclerViewCategories.layoutManager = GridLayoutManager(this, 2)
@@ -102,4 +141,16 @@ class DashboardActivity : AppCompatActivity() {
             }
         })
     }
+
+    private fun performLogout() {
+        val prefs = getSharedPreferences(Constants.SETTINGS, MODE_PRIVATE)
+        val email = prefs.getString(Constants.EMAIL_ID, null)
+
+        if (email != null) {
+            logoutViewModel.logout(email)
+        } else {
+            Toast.makeText(this, "No email found in session", Toast.LENGTH_SHORT).show()
+        }
+    }
+
 }

@@ -29,6 +29,7 @@ class SignupActivity : AppCompatActivity() {
 
         binding.btnSignup.setOnClickListener { validateAndSignup() }
         binding.btnLogin.setOnClickListener {
+
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
@@ -56,6 +57,7 @@ class SignupActivity : AppCompatActivity() {
         }
 
         val signupRequest = SignupRequest(fullName, mobileNo, email, password)
+
         viewModel.registerUser(signupRequest)
     }
 
@@ -63,6 +65,10 @@ class SignupActivity : AppCompatActivity() {
         viewModel.signupResponse.observe(this, Observer {
             Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
             if (it.status == 0) {
+                val email = binding.etEmail.text.toString()
+                val prefs = getSharedPreferences("user_session", MODE_PRIVATE)
+                prefs.edit().putString("email", email).apply()
+
                 startActivity(Intent(this, LoginActivity::class.java))
                 finish()
             }
