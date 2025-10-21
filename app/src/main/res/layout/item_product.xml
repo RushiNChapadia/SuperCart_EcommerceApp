@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:padding="8dp"
+    android:background="@android:color/white"
+    android:layout_marginBottom="6dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/imgProduct"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="8dp"
+        android:scaleType="centerCrop" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/tvName"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tvDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textColor="#444" />
+
+        <TextView
+            android:id="@+id/tvPrice"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp" />
+
+        <Button
+            android:id="@+id/btnAddToCart"
+            android:text="ADD TO CART"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textStyle="bold"
+            android:background="@android:color/transparent" />
+
+        <LinearLayout
+            android:id="@+id/layoutQuantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:gravity="center_vertical">
+
+            <Button
+                android:id="@+id/btnMinus"
+                android:text="-"
+                android:textSize="18sp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@android:color/holo_blue_light" />
+
+            <TextView
+                android:id="@+id/tvQuantity"
+                android:text="1"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_width="32dp"
+                android:layout_height="wrap_content"
+                android:gravity="center" />
+
+            <Button
+                android:id="@+id/btnPlus"
+                android:text="+"
+                android:textSize="18sp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@android:color/holo_blue_light" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
