@@ -52,4 +52,5 @@ dependencies {
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation ("com.squareup.okhttp3:logging-interceptor:4.9.3")
     implementation("com.github.bumptech.glide:glide:5.0.5")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.6")
 }
