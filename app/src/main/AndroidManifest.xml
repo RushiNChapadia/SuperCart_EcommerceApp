@@ -15,6 +15,9 @@
         android:theme="@style/Theme.EcommerceApp"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ProductDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".SmartPhonesActivity"
             android:exported="false" />
         <activity

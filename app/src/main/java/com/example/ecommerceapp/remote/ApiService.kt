@@ -5,6 +5,7 @@ import com.example.ecommerceapp.model.LoginRequest
 import com.example.ecommerceapp.model.LoginResponse
 import com.example.ecommerceapp.model.LogoutRequest
 import com.example.ecommerceapp.model.LogoutResponse
+import com.example.ecommerceapp.model.ProductDetailsResponse
 import com.example.ecommerceapp.model.ProductResponse
 import com.example.ecommerceapp.model.SignupRequest
 import com.example.ecommerceapp.model.SignupResponse
@@ -51,4 +52,9 @@ interface ApiService {
     @Headers("Content-Type: application/json")
     suspend fun logoutUser(@Body logoutRequest: LogoutRequest): Response<LogoutResponse>
 
+    @GET("Product/details/{product_id}")
+    @Headers("Content-Type: application/json")
+    suspend fun getProductDetails(
+        @Path("product_id") productId: Int
+    ): Response<ProductDetailsResponse>
 }

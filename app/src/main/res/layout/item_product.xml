@@ -66,6 +66,8 @@
                 android:id="@+id/btnMinus"
                 android:text="-"
                 android:textSize="18sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:background="@android:color/holo_blue_light" />
@@ -82,6 +84,8 @@
             <Button
                 android:id="@+id/btnPlus"
                 android:text="+"
+                android:textColor="@color/white"
+                android:textStyle="bold"
                 android:textSize="18sp"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
