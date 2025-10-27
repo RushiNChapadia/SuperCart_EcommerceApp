@@ -30,7 +30,7 @@ class DeliveryAddressAdapter(
         b.tvAddress.text = address.address
         b.radioSelect.isChecked = position == selectedPosition
 
-        // ✅ Use holder.adapterPosition instead (universal)
+        //  Use holder.adapterPosition instead (universal)
         b.root.setOnClickListener {
             val pos = holder.adapterPosition
             if (pos == RecyclerView.NO_POSITION) return@setOnClickListener

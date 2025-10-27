@@ -39,7 +39,7 @@ class ProductFragment : Fragment() {
         // Initialize RecyclerView
         binding.recyclerViewAndroid.layoutManager = LinearLayoutManager(requireContext())
         adapter = ProductAdapter(productList) { product ->
-            // 👇 When user clicks on product item
+            //  When user clicks on product item
             val intent = Intent(requireContext(), ProductDetailsActivity::class.java)
             intent.putExtra("product_id", product.product_id)
             startActivity(intent)
@@ -84,57 +84,3 @@ class ProductFragment : Fragment() {
         }
     }
 }
-
-
-//class ProductFragment : Fragment() {
-//
-//    private lateinit var recyclerView: RecyclerView
-//    private lateinit var adapter: ProductAdapter
-//    private val productList = mutableListOf<ProductModel>()
-//    private var subCategoryId: String? = null
-//
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        subCategoryId = arguments?.getString("sub_category_id")
-//    }
-//
-//    override fun onCreateView(
-//        inflater: LayoutInflater, container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View? {
-//        val view = inflater.inflate(R.layout.fragment_product, container, false)
-//        recyclerView = view.findViewById(R.id.recyclerViewAndroid)
-//        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-//        adapter = ProductAdapter(productList)
-//        recyclerView.adapter = adapter
-//        fetchProducts()
-//        return view
-//    }
-//
-//    private fun fetchProducts() {
-//        lifecycleScope.launch {
-//            try {
-//                val response = RetrofitClient.instance.getProductsBySubCategory(subCategoryId!!.toInt())
-//                if (response.isSuccessful && response.body()?.status == 0) {
-//                    productList.clear()
-//                    productList.addAll(response.body()!!.products)
-//                    adapter.notifyDataSetChanged()
-//                } else {
-//                    Toast.makeText(requireContext(), "No products found", Toast.LENGTH_SHORT).show()
-//                }
-//            } catch (e: Exception) {
-//                Toast.makeText(requireContext(), "Error: ${e.message}", Toast.LENGTH_SHORT).show()
-//            }
-//        }
-//    }
-//
-//    companion object {
-//        fun newInstance(subCategoryId: String): ProductFragment {
-//            val fragment = ProductFragment()
-//            val bundle = Bundle()
-//            bundle.putString("sub_category_id", subCategoryId)
-//            fragment.arguments = bundle
-//            return fragment
-//        }
-//    }
-//}

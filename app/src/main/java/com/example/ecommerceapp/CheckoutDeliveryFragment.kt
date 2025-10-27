@@ -22,7 +22,6 @@ import com.example.ecommerceapp.model.AddAddressRequest
 import com.example.ecommerceapp.viewmodel.CheckoutViewModel
 
 
-import kotlinx.coroutines.launch
 class CheckoutDeliveryFragment : Fragment() {
     private val checkoutViewModel: CheckoutViewModel by activityViewModels()
 
@@ -112,10 +111,10 @@ class CheckoutDeliveryFragment : Fragment() {
                 val response = api.addAddress(request)
 
                 if (response.isSuccessful && response.body() != null) {
-                    Toast.makeText(requireContext(), "✅ Address added!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), " Address added!", Toast.LENGTH_SHORT).show()
                     fetchAddresses()
                 } else {
-                    Toast.makeText(requireContext(), "❌ Failed to add address", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), " Failed to add address", Toast.LENGTH_SHORT).show()
                 }
             } catch (e: Exception) {
                 Log.e("AddressDebug", "Error: ${e.message}", e)

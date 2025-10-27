@@ -24,12 +24,12 @@ class CheckoutCartFragment : Fragment() {
     ): View {
         binding = FragmentCheckoutCartBinding.inflate(inflater, container, false)
 
-        // ✅ Ensure we load cart data from Room DB
+        //  Ensure we load cart data from Room DB
         cartViewModel.loadCart()
 
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        // ✅ Observe LiveData for changes
+        //  Observe LiveData for changes
         cartViewModel.cartItems.observe(viewLifecycleOwner) { items ->
             val adapter = CheckoutCartAdapter(items)
             binding.recyclerView.adapter = adapter
@@ -38,7 +38,7 @@ class CheckoutCartFragment : Fragment() {
             binding.tvTotal.text = "$ $total"
         }
 
-        // ✅ On "Next" click, do NOT clear the cart
+        //  On "Next" click, do NOT clear the cart
         binding.btnNext.setOnClickListener {
             val totalAmount = binding.tvTotal.text
             Toast.makeText(
@@ -47,7 +47,7 @@ class CheckoutCartFragment : Fragment() {
                 Toast.LENGTH_SHORT
             ).show()
 
-            // ✅ Proceed to delivery tab
+            //  Proceed to delivery tab
             (activity as? CheckoutActivity)?.goToNextTab()
         }
 

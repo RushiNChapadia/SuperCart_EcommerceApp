@@ -72,7 +72,7 @@ class CheckoutSummaryFragment : Fragment() {
             AppCompatActivity.MODE_PRIVATE
         )
 
-        // ✅ FIX: safely read user_id as String and convert to Int
+
         val userIdStr = userPrefs.getString(Constants.USER_ID, null)
         val userId = userIdStr?.toIntOrNull() ?: -1
 
@@ -88,7 +88,7 @@ class CheckoutSummaryFragment : Fragment() {
 
         val orderItems = items.map {
             OrderItem(
-                product_id = it.productId.toIntOrNull() ?: 0,  // ✅ ensure integer product_id
+                product_id = it.productId.toIntOrNull() ?: 0,
                 quantity = it.quantity,
                 unit_price = it.price
             )
@@ -108,15 +108,15 @@ class CheckoutSummaryFragment : Fragment() {
                 if (response.isSuccessful && response.body() != null) {
                     val result = response.body()!!
                     if (result.status == 0) {
-                        Toast.makeText(requireContext(), "✅ ${result.message}", Toast.LENGTH_SHORT)
+                        Toast.makeText(requireContext(), " ${result.message}", Toast.LENGTH_SHORT)
                             .show()
 
-                        // ✅ Go to OrderDetailsActivity
+                        //  Go to OrderDetailsActivity
                         val intent = Intent(requireContext(), OrderDetailsActivity::class.java)
                         intent.putExtra("order_id", result.order_id)
                         startActivity(intent)
 
-                        // ✅ Clear cart & mark order as placed
+                        // Clear cart & mark order as placed
                         cartViewModel.clearCart()
                         orderPlaced = true
                         requireActivity().finish()
@@ -133,48 +133,3 @@ class CheckoutSummaryFragment : Fragment() {
         }
     }
 }
-//class CheckoutSummaryFragment : Fragment() {
-//
-//    private lateinit var binding: FragmentCheckoutSummaryBinding
-//    private val cartViewModel: CartViewModel by activityViewModels()
-//    private val checkoutViewModel: CheckoutViewModel by activityViewModels()
-//
-//    override fun onCreateView(
-//        inflater: LayoutInflater, container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View {
-//        binding = FragmentCheckoutSummaryBinding.inflate(inflater, container, false)
-//
-//        setupRecyclerView()
-//        observeData()
-//
-//        binding.btnConfirmOrder.setOnClickListener {
-//            Toast.makeText(requireContext(), "🎉 Order Placed Successfully!", Toast.LENGTH_SHORT).show()
-//            cartViewModel.clearCart()
-//            requireActivity().finish()
-//        }
-//
-//        return binding.root
-//    }
-//
-//    private fun setupRecyclerView() {
-//        binding.recyclerViewSummaryCart.layoutManager = LinearLayoutManager(requireContext())
-//    }
-//
-//    private fun observeData() {
-//        cartViewModel.cartItems.observe(viewLifecycleOwner) { items ->
-//            binding.recyclerViewSummaryCart.adapter = CheckoutCartAdapter(items)
-//            val total = items.sumOf { it.price * it.quantity }
-//            binding.tvTotalAmount.text = "$ $total"
-//        }
-//
-//        checkoutViewModel.selectedAddress.observe(viewLifecycleOwner) { address ->
-//            binding.tvDeliveryAddress.text =
-//                if (address != null) "${address.title}\n${address.address}" else "No address selected"
-//        }
-//
-//        checkoutViewModel.selectedPayment.observe(viewLifecycleOwner) { payment ->
-//            binding.tvPaymentOption.text = payment.ifEmpty { "No payment option selected" }
-//        }
-//    }
-//}

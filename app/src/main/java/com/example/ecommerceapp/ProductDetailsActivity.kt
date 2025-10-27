@@ -35,7 +35,7 @@ class ProductDetailsActivity : AppCompatActivity() {
         binding = ActivityProductDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // ✅ Get product_id as String and convert safely
+        //  Get product_id as String and convert safely
         val productIdStr = intent.getStringExtra("product_id")
         val productId = productIdStr?.toIntOrNull()
 
@@ -48,10 +48,10 @@ class ProductDetailsActivity : AppCompatActivity() {
         setupRecyclerViews()
         observeData()
 
-        // ✅ Trigger ViewModel fetch AFTER observers are set
+        //  Trigger ViewModel fetch AFTER observers are set
         viewModel.fetchProductDetails(productId)
 
-        // ✅ Handle Add to Cart button
+        //  Handle Add to Cart button
         binding.btnAddToCart.setOnClickListener {
             val product = viewModel.productDetailsResponse.value?.body()?.product
             if (product != null) {
@@ -94,7 +94,7 @@ class ProductDetailsActivity : AppCompatActivity() {
                 binding.tvPrice.text = "$ ${product.price}"
 
 
-                // ✅ Set Adapters (make sure adapters exist)
+                //  Set Adapters (make sure adapters exist)
                 binding.viewPagerImages.adapter = ImageSliderAdapter(this, product.images)
                 binding.rvSpecifications.adapter = SpecificationAdapter(product.specifications)
                 binding.rvReviews.adapter = ReviewAdapter(product.reviews)

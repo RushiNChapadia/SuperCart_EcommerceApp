@@ -26,7 +26,7 @@ class CategoryAdapter(
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         val category = categories[position]
 
-        // NOTE: use your actual property names from Category.kt
+
         holder.binding.tvCategoryName.text = category.categoryName
 
         val imageUrl = if (category.categoryImageUrl.startsWith("http")) {
@@ -39,7 +39,7 @@ class CategoryAdapter(
             .load(imageUrl)
             .into(holder.binding.ivCategoryImage)
 
-        // 🔹 Click
+        //  Click
         holder.binding.root.setOnClickListener {
             onItemClick(category)
         }

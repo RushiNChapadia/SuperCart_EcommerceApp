@@ -40,12 +40,12 @@ class ProductAdapter(
             .load(BASE_IMAGE_URL + product.product_image_url)
             .into(b.imgProduct)
 
-        // 🟢 Handle clicks on the entire item (image, name, desc, etc.)
+        //  Handle clicks on the entire item (image, name, desc, etc.)
         b.root.setOnClickListener {
             onItemClick(product)
         }
 
-        // 🛒 Add-to-cart logic
+        //  Add-to-cart logic
         b.btnAddToCart.setOnClickListener {
             b.btnAddToCart.visibility = View.GONE
             b.layoutQuantity.visibility = View.VISIBLE

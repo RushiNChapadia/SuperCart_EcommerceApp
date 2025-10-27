@@ -41,31 +41,3 @@ class CheckoutCartAdapter(
 
     override fun getItemCount(): Int = cartItems.size
 }
-
-//class CheckoutCartAdapter(private val items: List<CartItem>) :
-//    RecyclerView.Adapter<CheckoutCartAdapter.CartViewHolder>() {
-//
-//    inner class CartViewHolder(val binding: ItemCheckoutCartBinding) :
-//        RecyclerView.ViewHolder(binding.root)
-//
-//    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
-//        val binding = ItemCheckoutCartBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-//        return CartViewHolder(binding)
-//    }
-//
-//    override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
-//        val item = items[position]
-//        with(holder.binding) {
-//            tvName.text = item.productName
-//            tvUnitPrice.text = "$ ${item.price}"
-//            tvQuantity.text = "Quantity: ${item.quantity}"
-//            tvAmount.text = "$ ${item.price * item.quantity}"
-//
-//            Glide.with(imgProduct.context)
-//                .load("http://10.0.2.2/myshop/images/${item.product_image_url}")
-//                .into(imgProduct)
-//        }
-//    }
-//
-//    override fun getItemCount() = items.size
-//}
