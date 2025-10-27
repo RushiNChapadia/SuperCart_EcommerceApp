@@ -37,6 +37,16 @@
             android:textStyle="bold"
             android:layout_marginTop="8dp" />
 
+        <Button
+            android:id="@+id/btnAddToCart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add to Cart"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#E36C0A"
+            android:textColor="@android:color/white" />
+
         <TextView
             android:text="Specifications"
             android:textStyle="bold"

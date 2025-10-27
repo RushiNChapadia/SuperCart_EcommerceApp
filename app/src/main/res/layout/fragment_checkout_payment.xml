@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Payment Option"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="12dp"/>
+
+    <RadioGroup
+        android:id="@+id/radioGroupPayment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layoutDirection="rtl">
+
+        <RadioButton
+            android:id="@+id/rbCashOnDelivery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cash On Delivery"
+            android:checked="true"
+            android:padding="12dp"/>
+
+        <RadioButton
+            android:id="@+id/rbInternetBanking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Internet Banking"
+            android:padding="12dp"
+            />
+
+        <RadioButton
+            android:id="@+id/rbDebitCredit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Debit Card / Credit Card"
+            android:padding="12dp"/>
+
+        <RadioButton
+            android:id="@+id/rbPaypal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PayPal"
+            android:padding="12dp"/>
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnNextPayment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="NEXT"
+        android:textStyle="bold"
+        android:backgroundTint="#2196F3"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="20dp"/>
+
+</LinearLayout>

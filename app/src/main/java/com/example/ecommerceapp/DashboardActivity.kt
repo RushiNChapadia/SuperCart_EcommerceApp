@@ -74,6 +74,10 @@ class DashboardActivity : AppCompatActivity() {
                 R.id.nav_logout -> {
                     performLogout()
                 }
+                R.id.nav_cart -> {
+                    startActivity(Intent(this, CartActivity::class.java))
+                }
+
                 // Add other menu items if needed
             }
             binding.drawerLayout.closeDrawers()

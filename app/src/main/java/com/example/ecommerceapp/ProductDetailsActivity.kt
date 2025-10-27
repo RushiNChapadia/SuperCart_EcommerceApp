@@ -7,6 +7,9 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStoreOwner
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.ecommerceapp.databinding.ActivityProductDetailsBinding
@@ -14,11 +17,18 @@ import com.example.ecommerceapp.viewmodel.ProductDetailsViewModel
 import com.example.ecommerceapp.ReviewAdapter
 import com.example.ecommerceapp.SpecificationAdapter
 import com.example.ecommerceapp.ImageSliderAdapter
+import com.example.ecommerceapp.model.CartItem
+import com.example.ecommerceapp.viewmodel.CartViewModel
+import kotlinx.coroutines.launch
+import kotlin.getValue
 
 class ProductDetailsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityProductDetailsBinding
     private val viewModel: ProductDetailsViewModel by viewModels()
+    private val cartViewModel: CartViewModel by viewModels()
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +50,28 @@ class ProductDetailsActivity : AppCompatActivity() {
 
         // ✅ Trigger ViewModel fetch AFTER observers are set
         viewModel.fetchProductDetails(productId)
+
+        // ✅ Handle Add to Cart button
+        binding.btnAddToCart.setOnClickListener {
+            val product = viewModel.productDetailsResponse.value?.body()?.product
+            if (product != null) {
+                val item = CartItem(
+                    productId = product.product_id,
+                    productName = product.product_name,
+                    description = product.description,
+                    product_image_url = product.product_image_url,
+                    price = product.price.toDoubleOrNull() ?: 0.0,
+                    quantity = 1
+                )
+
+                lifecycleScope.launch {
+                    cartViewModel.addToCart(item)
+                    android.util.Log.d("CartDebug", "✅ Added to cart: $item")
+                    Toast.makeText(this@ProductDetailsActivity, "Added to cart", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
     }
 
     private fun setupRecyclerViews() {

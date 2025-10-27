@@ -1,10 +1,16 @@
 package com.example.ecommerceapp.remote
 
+import com.example.ecommerceapp.model.AddAddressRequest
+import com.example.ecommerceapp.model.AddressListResponse
+import com.example.ecommerceapp.model.ApiResponse
 import com.example.ecommerceapp.model.CategoryResponse
 import com.example.ecommerceapp.model.LoginRequest
 import com.example.ecommerceapp.model.LoginResponse
 import com.example.ecommerceapp.model.LogoutRequest
 import com.example.ecommerceapp.model.LogoutResponse
+import com.example.ecommerceapp.model.OrderDetailsResponse
+import com.example.ecommerceapp.model.OrderRequest
+import com.example.ecommerceapp.model.OrderResponse
 import com.example.ecommerceapp.model.ProductDetailsResponse
 import com.example.ecommerceapp.model.ProductResponse
 import com.example.ecommerceapp.model.SignupRequest
@@ -57,4 +63,20 @@ interface ApiService {
     suspend fun getProductDetails(
         @Path("product_id") productId: Int
     ): Response<ProductDetailsResponse>
+
+    @POST("User/address")
+    @Headers("Content-Type: application/json")
+    suspend fun addAddress(@Body request: AddAddressRequest): Response<ApiResponse>
+
+    @GET("User/addresses/{user_id}")
+    @Headers("Content-Type: application/json")
+    suspend fun getAddresses(@Path("user_id") userId: Int): Response<AddressListResponse>
+
+    @Headers("Content-Type: application/json")
+    @POST("Order")
+    suspend fun placeOrder(@Body request: OrderRequest): Response<OrderResponse>
+
+    @Headers("Content-Type: application/json")
+    @GET("Order")
+    suspend fun getOrderDetails(@Query("order_id") orderId: Int): Response<OrderDetailsResponse>
 }
